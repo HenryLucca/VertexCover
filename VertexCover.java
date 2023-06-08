@@ -38,8 +38,8 @@ public class VertexCover {
         Edge[] graphEdges = { 
             new Edge(graphVertices[0], graphVertices[1]), new Edge(graphVertices[0], graphVertices[3]),
             new Edge(graphVertices[0], graphVertices[4]), new Edge(graphVertices[1], graphVertices[2]),
-            new Edge(graphVertices[1], graphVertices[3]), new Edge(graphVertices[2], graphVertices[3]),
-            new Edge(graphVertices[2], graphVertices[4]), new Edge(graphVertices[3], graphVertices[4]) 
+            new Edge(graphVertices[1], graphVertices[3]), new Edge(graphVertices[2], graphVertices[4]), 
+			new Edge(graphVertices[3], graphVertices[4]) 
         }; // the graph shown in the slides
 
         Graph graph = new Graph(graphVertices, graphEdges);
@@ -85,28 +85,6 @@ public class VertexCover {
 
 		return maxVertex;// returns the Vertex with the most associated Edges
 	}// getMaxDegree(ArrayList<Vertex>, ArrayList<Edge>)
-	
-	// Allows VertexCover approaches to get all the possible combinations of Vertex covers - recursive method
-	protected void combinations(ArrayList<Vertex> vertices, int k, ArrayList<Vertex> current, int currentTot, boolean[] visit) {
-
-		if (currentTot >= k-1) {// determines if the current permutation holds k or more values
-			ArrayList<Vertex> temp = new ArrayList<Vertex>();
-			for (int i = 0; i < current.size(); i++)
-				temp.add(current.get(i));
-			possibleCovers.add(temp);
-			return;
-		}
-
-		for (int i = 0; i < vertices.size(); i++) {
-			if(!visit[i]) {
-				current.set(++currentTot, vertices.get(i));
-				visit[i] = true;
-				combinations(vertices, k, current, currentTot, visit);// recursively calls itself with updated values
-				visit[i] = false;// resets ith Vertex to unset for next permutation
-				currentTot--;
-			}
-		}
-	}
 
     protected void greedyCover() {
 		ArrayList<Edge> edges = graph.getEdges();
