@@ -38,8 +38,8 @@ public class VertexCover {
         Edge[] graphEdges = { 
             new Edge(graphVertices[0], graphVertices[1]), new Edge(graphVertices[0], graphVertices[3]),
             new Edge(graphVertices[0], graphVertices[4]), new Edge(graphVertices[1], graphVertices[2]),
-            new Edge(graphVertices[1], graphVertices[3]), new Edge(graphVertices[2], graphVertices[4]), 
-			new Edge(graphVertices[3], graphVertices[4]) 
+            new Edge(graphVertices[1], graphVertices[4]), new Edge(graphVertices[2], graphVertices[3]),
+            new Edge(graphVertices[2], graphVertices[4]), new Edge(graphVertices[3], graphVertices[4]) 
         }; // the graph shown in the slides
 
         Graph graph = new Graph(graphVertices, graphEdges);
