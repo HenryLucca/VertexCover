@@ -88,29 +88,30 @@ public class VertexCover {
 	
 	// Allows VertexCover approaches to get all the possible combinations of Vertex covers - recursive method
 	protected void combinations(ArrayList<Vertex> vertices, int k, ArrayList<Vertex> current, int currentTot, boolean[] visit) {
+
 		if (currentTot >= k-1) {// determines if the current permutation holds k or more values
-			ArrayList<Vertex> temp = new ArrayList<Vertex>();// creates a temp ArrayList<Vertex> to hold current permutation
-			for (int i = 0; i < current.size(); i++)// loops through the current permutation
-				temp.add(current.get(i));// adds each Vertex in the current permutation to the temp ArrayList<Vertex>
-			possibleCovers.add(temp);// adds the current Vertex permutation to the list of possible covers
-			return;// returns from the current iteration of the recursive method
-		}// if (currentTot)
-		// loops through the Vertices in the Graph
+			ArrayList<Vertex> temp = new ArrayList<Vertex>();
+			for (int i = 0; i < current.size(); i++)
+				temp.add(current.get(i));
+			possibleCovers.add(temp);
+			return;
+		}
+
 		for (int i = 0; i < vertices.size(); i++) {
-			if(!visit[i]) {// determines if the ith Vertex has already been set
-				current.set(++currentTot, vertices.get(i));// if not, sets the ith Vertex in the current permutation, increments vertex count
-				visit[i] = true;// sets the ith Vertex as being set
+			if(!visit[i]) {
+				current.set(++currentTot, vertices.get(i));
+				visit[i] = true;
 				combinations(vertices, k, current, currentTot, visit);// recursively calls itself with updated values
 				visit[i] = false;// resets ith Vertex to unset for next permutation
-				currentTot--;// decrements the vertex count
-			}// if (!visit)
-		}// for (int i)
-	}// combinations(ArrayList<Vertex>, int, ArrayList<Vertex>, int, boolean[]) method
+				currentTot--;
+			}
+		}
+	}
 
     protected void greedyCover() {
-		ArrayList<Edge> edges = graph.getEdges();// gets all the Edges in the Graph
-		ArrayList<Vertex> vertices = graph.getVertices();// gets all the Vertices in the Graph
-		cover = new ArrayList<Vertex>();// creates a new ArrayList<Vertex> to hold the Vertex cover
+		ArrayList<Edge> edges = graph.getEdges();
+		ArrayList<Vertex> vertices = graph.getVertices();
+		cover = new ArrayList<Vertex>();// a new ArrayList<Vertex> to hold the Vertex cover
 
 		while (!edges.isEmpty()) {// loops until a Vertex cover has been found
 			Vertex vertex = getMaxDegree(vertices, edges);// gets the Vertex with the most associated Edges
